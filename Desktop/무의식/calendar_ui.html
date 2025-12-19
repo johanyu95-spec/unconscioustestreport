@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif;
+            background: #FAFAFA;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+            padding: 60px 32px 100px;
+            position: relative;
+        }
+
+        .day-section {
+            margin-bottom: 56px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .day-number {
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+            transition: color 0.3s ease;
+        }
+
+        .day-number.past {
+            color: #E8E8E8;
+        }
+
+        .day-number.today {
+            color: #FF8B94;
+        }
+
+        .day-number.future {
+            color: #1A1A1A;
+        }
+
+        .day-info {
+            text-align: right;
+            padding-top: 8px;
+        }
+
+        .day-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1A1A1A;
+            margin-bottom: 2px;
+        }
+
+        .month-name {
+            font-size: 14px;
+            font-weight: 400;
+            color: #ABABAB;
+        }
+
+        .events {
+            padding-left: 8px;
+        }
+
+        .event {
+            display: flex;
+            margin-bottom: 12px;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event:hover {
+            transform: translateX(4px);
+        }
+
+        .event-badge {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-right: 16px;
+            min-width: 48px;
+            padding-top: 2px;
+        }
+
+        .event-badge.done {
+            color: #ABABAB;
+        }
+
+        .event-badge.todo {
+            color: #FF8B94;
+        }
+
+        .event-time {
+            color: #FFB4A2;
+            font-size: 13px;
+            font-weight: 500;
+            margin-right: 16px;
+            min-width: 48px;
+        }
+
+        .event-title {
+            font-size: 15px;
+            font-weight: 400;
+            color: #1A1A1A;
+            transition: color 0.3s ease;
+        }
+
+        .event.done .event-title {
+            color: #ABABAB;
+        }
+
+        .event:hover .event-title {
+            color: #FF8B94;
+        }
+
+        /* Floating Action Buttons */
+        .fab-container {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .fab:active {
+            transform: scale(0.95);
+        }
+
+        .fab-menu {
+            background: #FFFFFF;
+            color: #1A1A1A;
+        }
+
+        .fab-add {
+            background: #2A2A2A;
+            color: #FFFFFF;
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Empty State */
+        .empty-day {
+            padding: 32px 8px;
+            opacity: 0.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 24px 100px;
+            }
+
+            .day-number {
+                font-size: 64px;
+            }
+
+            .fab-container {
+                right: 24px;
+                bottom: 24px;
+            }
+        }
+
+        /* Subtle animations */
+        .event {
+            animation: slideIn 0.4s ease-out backwards;
+        }
+
+        .event:nth-child(1) { animation-delay: 0.1s; }
+        .event:nth-child(2) { animation-delay: 0.15s; }
+        .event:nth-child(3) { animation-delay: 0.2s; }
+        .event:nth-child(4) { animation-delay: 0.25s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Day 11 - Past -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number past">11</div>
+                <div class="day-info">
+                    <div class="day-name">Wednesday</div>
+                    <div class="month-name">March</div>
+                </div>
+            </div>
+            <div class="events">
+                <div class="event done">
+                    <div class="event-badge done">DONE</div>
+                    <div class="event-title">Preorder Cybertruck</div>
+                </div>
+                <div class="event done">
+                    <div class="event-badge done">DONE</div>
+                    <div class="event-title">Lunch Meeting</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 12 - Today -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number today">12</div>
+                <div class="day-info">
+                    <div class="day-name">Thursday</div>
+                    <div class="month-name">March</div>
+                </div>
+            </div>
+            <div class="events">
+                <div class="event">
+                    <div class="event-badge todo">TODO</div>
+                    <div class="event-title">Water plants</div>
+                </div>
+                <div class="event">
+                    <div class="event-time">4:00 P</div>
+                    <div class="event-title">Groceries</div>
+                </div>
+                <div class="event">
+                    <div class="event-time">7:00 P</div>
+                    <div class="event-title">Dinner with Rose</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 13 - Future -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number future">13</div>
+                <div class="day-info">
+                    <div class="day-name">Friday</div>
+                    <div class="month-name">March</div>
+                </div>
+            </div>
+            <div class="events empty-day">
+                <!-- No events -->
+            </div>
+        </div>
+
+        <!-- Day 14 - Future -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number future">14</div>
+                <div class="day-info">
+                    <div class="day-name">Saturday</div>
+                    <div class="day-name">March</div>
+                </div>
+            </div>
+            <div class="events">
+                <div class="event">
+                    <div class="event-badge todo">TODO</div>
+                    <div class="event-title">Hiking Trip</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 15 - Future -->
+        <div class="day-section">
+            <div class="day-header">
+                <div class="day-number future">15</div>
+                <div class="day-info">
+                    <div class="day-name">Sunday</div>
+                    <div class="month-name">March</div>
+                </div>
+            </div>
+            <div class="events empty-day">
+                <!-- No events -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <button class="fab fab-menu" aria-label="Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <button class="fab fab-add" aria-label="Add event">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Add smooth interaction feedback
+        document.querySelectorAll('.event').forEach(event => {
+            event.addEventListener('click', function() {
+                this.style.opacity = '0.5';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        // FAB interactions
+        document.querySelectorAll('.fab').forEach(fab => {
+            fab.addEventListener('click', function() {
+                // Add ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    width: 100px;
+                    height: 100px;
+                    margin-left: -50px;
+                    margin-top: -50px;
+                    animation: ripple 0.6s;
+                    pointer-events: none;
+                `;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    opacity: 1;
+                    transform: scale(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(2);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
