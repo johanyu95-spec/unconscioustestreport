@@ -1,12 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { X, Sparkles } from 'lucide-react';
 
 interface IntroStageProps {
     onComplete: () => void;
 }
 
 export default function IntroStage({ onComplete }: IntroStageProps) {
+    const [showPromo, setShowPromo] = useState(false);
+
+    useEffect(() => {
+        // Show promo on mount with a slight delay for effect
+        const timer = setTimeout(() => setShowPromo(true), 500);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="w-full min-h-[85vh] flex flex-col bg-[#F9FAFB] text-gray-900 font-sans pb-32 relative -mx-6 -my-6 sm:mx-0 sm:my-0 text-center">
 
@@ -83,25 +92,6 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
                         </div>
                     </div>
 
-                    {/* Soft Launch Event Card */}
-                    <div className="relative z-10 overflow-hidden w-full rounded-2xl bg-gradient-to-br from-indigo-900 to-blue-900 p-5 text-white shadow-xl mt-4 animate-in zoom-in-95 duration-700 delay-300">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse"></div>
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -ml-10 -mb-10 animate-pulse"></div>
-
-                        <div className="relative z-10 flex flex-col gap-1 text-center items-center">
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/10 backdrop-blur-sm animate-pulse">
-                                    Soft Launch Event
-                                </span>
-                            </div>
-                            <h3 className="text-sm font-bold">심층 분석 리포트 <span className="text-yellow-300">무료 제공</span></h3>
-                            <p className="text-[10px] text-blue-100/90 leading-relaxed">
-                                PRISM 런칭 기념, 33,000원 상당 분석을<br />
-                                <strong className="text-white">100% 무료</strong>로 제공해 드립니다.
-                            </p>
-                        </div>
-                    </div>
-
                 </div>
 
             </main>
@@ -123,6 +113,64 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
                     </div>
                 </button>
             </div>
+
+            {/* PROMO POPUP MODAL */}
+            {showPromo && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+                    <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl relative animate-in zoom-in-95 slide-in-from-bottom-5 duration-500">
+                        {/* Decorative Background */}
+                        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-br from-indigo-900 to-blue-900">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse"></div>
+                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -ml-10 -mb-10 animate-pulse"></div>
+                        </div>
+
+                        {/* Close Button (Top Right) */}
+                        <button
+                            onClick={() => setShowPromo(false)}
+                            className="absolute top-4 right-4 z-20 p-2 bg-black/20 backdrop-blur-md rounded-full text-white/90 hover:bg-black/40 transition-colors"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        <div className="relative pt-8 px-6 pb-6 text-center flex flex-col items-center">
+                            {/* Icon/Badge */}
+                            <div className="mb-4 relative">
+                                <div className="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center relative z-10 rotate-3">
+                                    <Sparkles className="w-8 h-8 text-blue-600 fill-blue-100" />
+                                </div>
+                                <div className="absolute inset-0 bg-blue-500/30 blur-xl transform translate-y-2"></div>
+                            </div>
+
+                            {/* Badge Text */}
+                            <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-wider uppercase mb-3 border border-blue-100">
+                                Soft Launch Event
+                            </span>
+
+                            {/* Headline */}
+                            <h3 className="text-xl font-extrabold text-gray-900 mb-2 leading-snug">
+                                심층 분석 리포트<br />
+                                <span className="text-blue-600">무료 제공 프로모션</span>
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-gray-500 text-sm leading-relaxed mb-6 break-keep">
+                                PRISM 런칭을 기념하여<br />
+                                유료 Premium 심층 분석을 한시적으로<br />
+                                <strong>100% 무료</strong>로 제공해 드립니다.
+                            </p>
+
+                            {/* CTA Button is closing the modal as per request to 'enter' */}
+                            <button
+                                onClick={() => setShowPromo(false)}
+                                className="w-full py-4 bg-gray-900 hover:bg-black text-white rounded-2xl font-bold text-sm shadow-xl shadow-gray-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                            >
+                                혜택 받고 시작하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
