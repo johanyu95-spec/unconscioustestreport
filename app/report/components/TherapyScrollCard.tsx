@@ -18,11 +18,11 @@ interface TherapyCardProps {
 }
 
 const SenseIcons = {
-    visual: { icon: Eye, label: '시각', color: 'bg-blue-500/20 text-blue-600', image: '/images/sense/sense_visual.webp' },
-    auditory: { icon: Ear, label: '청각', color: 'bg-purple-500/20 text-purple-600', image: '/images/sense/sense_auditory.webp' },
-    taste: { icon: Coffee, label: '미각', color: 'bg-orange-500/20 text-orange-600', image: '/images/sense/sense_taste.webp' },
-    smell: { icon: Wind, label: '후각', color: 'bg-green-500/20 text-green-600', image: '/images/sense/sense_smell.webp' },
-    touch: { icon: Hand, label: '촉각', color: 'bg-pink-500/20 text-pink-600', image: '/images/sense/sense_touch.webp' },
+    visual: { icon: Eye, label: '시각', color: 'bg-blue-500/20 text-blue-600', image: '/images/sense/sense_visual.webp', gradient: 'from-blue-900 to-indigo-900' },
+    auditory: { icon: Ear, label: '청각', color: 'bg-purple-500/20 text-purple-600', image: '/images/sense/sense_auditory.webp', gradient: 'from-purple-900 to-fuchsia-900' },
+    taste: { icon: Coffee, label: '미각', color: 'bg-orange-500/20 text-orange-600', image: '/images/sense/sense_taste.webp', gradient: 'from-orange-900 to-red-900' },
+    smell: { icon: Wind, label: '후각', color: 'bg-green-500/20 text-green-600', image: '/images/sense/sense_smell.webp', gradient: 'from-emerald-900 to-teal-900' },
+    touch: { icon: Hand, label: '촉각', color: 'bg-pink-500/20 text-pink-600', image: '/images/sense/sense_touch.webp', gradient: 'from-pink-900 to-rose-900' },
 };
 
 export default function TherapyScrollCard({ items }: TherapyCardProps) {
@@ -38,8 +38,8 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                 {items.map((item, index) => {
                     const Sense = SenseIcons[item.type] || SenseIcons.visual;
                     const Icon = Sense.icon;
-                    // Force replace image with the Representative Sense Image
-                    const displayImage = Sense.image;
+                    // Fallback to Gradient if image fails (Handled by bg-gradient class below)
+                    // We render a colored div BEHIND the image div.
 
                     return (
                         <motion.div
@@ -49,17 +49,17 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
                             onClick={() => setSelectedItem(item)}
-                            className="flex-none w-[160px] h-[200px] rounded-[var(--border-radius-card)] relative overflow-hidden snap-start shadow-lg cursor-pointer group bg-gray-900"
+                            className={`flex-none w-[160px] h-[200px] rounded-[var(--border-radius-card)] relative overflow-hidden snap-start shadow-lg cursor-pointer group bg-gradient-to-br ${Sense.gradient}`}
                         >
-                            {/* Background Image */}
+                            {/* Background Image (Optional: will overlay gradient if exists) */}
                             <motion.div
                                 layoutId={`image-${item.id}`}
-                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80"
-                                style={{ backgroundImage: `url(${displayImage})` }}
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 mix-blend-overlay"
+                                style={{ backgroundImage: `url(${Sense.image})` }}
                             />
 
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
+                            {/* Overlay Gradient for Text Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90" />
 
                             {/* Sense Badge */}
                             <div className={`absolute top-3 left-3 p-1.5 rounded-full backdrop-blur-md border border-white/20 bg-white/10 ${Sense.color.replace('text-', 'text-white ')}`}>
@@ -103,11 +103,11 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                                 <X className="w-5 h-5" />
                             </button>
 
-                            {/* Image Header */}
-                            <div className="relative h-64 w-full">
+                            {/* Image Header with Gradient Fallback */}
+                            <div className={`relative h-64 w-full bg-gradient-to-br ${SenseIcons[selectedItem.type].gradient}`}>
                                 <motion.div
                                     layoutId={`image-${selectedItem.id}`}
-                                    className="absolute inset-0 bg-cover bg-center"
+                                    className="absolute inset-0 bg-cover bg-center mix-blend-overlay"
                                     style={{ backgroundImage: `url(${SenseIcons[selectedItem.type].image})` }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
