@@ -13,8 +13,8 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
             {/* Header */}
             <header className="pt-10 px-6 pb-6 flex justify-center items-center h-20">
                 <div className="px-4 py-1.5 rounded-full bg-white border border-gray-100 shadow-sm flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-gray-900">Psychology Lab</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.5)]"></div>
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-gray-900">PRISM LAB</span>
                 </div>
             </header>
 
@@ -79,6 +79,25 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
                             <h3 className="font-bold text-white text-[16px] mb-2">진정한 변화</h3>
                             <p className="text-[12px] text-gray-400 leading-relaxed break-keep">
                                 무의식을 의식화할 때<br />비로소 운명은 바뀝니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Soft Launch Event Card */}
+                    <div className="relative z-10 overflow-hidden w-full rounded-2xl bg-gradient-to-br from-indigo-900 to-blue-900 p-5 text-white shadow-xl mt-4 animate-in zoom-in-95 duration-700 delay-300">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -ml-10 -mb-10 animate-pulse"></div>
+
+                        <div className="relative z-10 flex flex-col gap-1 text-center items-center">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/10 backdrop-blur-sm animate-pulse">
+                                    Soft Launch Event
+                                </span>
+                            </div>
+                            <h3 className="text-sm font-bold">심층 분석 리포트 <span className="text-yellow-300">무료 제공</span></h3>
+                            <p className="text-[10px] text-blue-100/90 leading-relaxed">
+                                PRISM 런칭 기념, 33,000원 상당 분석을<br />
+                                <strong className="text-white">100% 무료</strong>로 제공해 드립니다.
                             </p>
                         </div>
                     </div>
