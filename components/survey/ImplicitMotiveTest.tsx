@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useTestStore } from "@/store/testStore";
-import { motion, AnimatePresence } from "framer-motion";
 
 // Update to use the generated images
 const COMMON_QUESTIONS = [
@@ -107,6 +106,7 @@ export default function ImplicitMotiveTest() {
 
             {/* Image Area */}
             <div className="relative w-full overflow-hidden rounded-xl shadow-md bg-gray-100 aspect-video">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={currentImage.src}
                     alt="Test Image"
@@ -119,7 +119,7 @@ export default function ImplicitMotiveTest() {
             {/* Single Question Area */}
             <div className="flex-1 flex flex-col justify-center space-y-8 animate-in slide-in-from-right fade-in duration-300" key={currentQuestion.id}>
                 <p className="text-xl font-bold text-center text-gray-900 leading-relaxed">
-                    "{currentQuestion.text}"
+                    &quot;{currentQuestion.text}&quot;
                 </p>
 
                 <div className="space-y-4">

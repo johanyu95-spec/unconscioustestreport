@@ -95,6 +95,7 @@ export const getInterpretation = (zScore: number): string => {
     return "낮음";
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const calculatePAIMAIndicators = (results: any): PAIMAIndicators => {
     const iA = results.implicit?.implicitAnswers || {};
     const eA = results.explicit?.explicitAnswers || {};
@@ -130,6 +131,7 @@ export const calculatePAIMAIndicators = (results: any): PAIMAIndicators => {
     const Z_MDI_Aff = parseFloat(Math.abs(Z_eM_Aff - Z_iM_Aff).toFixed(2));
     const Z_PSCI = parseFloat(((Z_MDI_Ach + Z_MDI_Pow + Z_MDI_Aff) / 3).toFixed(2));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const scores: any = {
         Z_PSCI, Z_MDI_Ach, Z_MDI_Pow, Z_MDI_Aff,
         Z_iM_Ach, Z_iM_Pow, Z_iM_Aff,

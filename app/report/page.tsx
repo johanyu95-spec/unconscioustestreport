@@ -370,6 +370,7 @@ export default function ReportPage() {
                 <div className="min-h-[400px] relative">
                     {/* Tab 0: Main Report */}
                     {currentPage === 0 && (
+                        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <WebReportView
                                 results={activeResults}

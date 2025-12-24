@@ -6,16 +6,14 @@ export const determineProfile = (scores: PaimaScores): ProfileKey => {
     const {
         Z_PSCI, Z_MDI_Ach, Z_MDI_Pow, Z_MDI_Aff,
         Z_iM_Ach, Z_iM_Pow, Z_iM_Aff,
-        Z_eM_Ach, Z_eM_Pow, Z_eM_Aff,
-        Z_N_Auto, Z_N_Comp, Z_N_Rela,
+        Z_eM_Ach, Z_eM_Pow,
+        Z_N_Auto,
         Z_W_Wellbeing, Z_C_Depletion, Z_C_External
     } = scores;
 
     // Helper: Thresholds for Z-scores (-2.0 to +2.0 range)
     const HIGH = 0.5;      // Approx top 30%
-    const VERY_HIGH = 1.0; // Approx top 16%
     const LOW = -0.5;
-    const VERY_LOW = -1.0;
 
     // 1. INTEGRATED_SAGE (High Well-being, Low Conflict)
     // Statistical Role: Low MDI, Low PSCI, High Needs.

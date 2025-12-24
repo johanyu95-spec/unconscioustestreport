@@ -83,7 +83,7 @@ export default function ExplicitMotiveTest() {
 
             <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
                 <p className="text-xs text-gray-400 mb-2">당신의 목표</p>
-                <p className="text-lg font-medium text-gray-800 italic">"{goalInput}"</p>
+                <p className="text-lg font-medium text-gray-800 italic">&quot;{goalInput}&quot;</p>
             </div>
 
             <div className="flex-1 flex flex-col justify-center space-y-8" key={currentQuestion.id}>
