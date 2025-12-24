@@ -134,15 +134,7 @@ export default function HomePage() {
             case "INTRO":
                 return (
                     <div className={`flex flex-col items-center justify-center min-h-screen bg-black transition-opacity duration-1000 ease-in-out ${isFadingOut ? 'opacity-0' : 'opacity-100'}`}>
-                        {/* Soft Launch Badge */}
-                        <div className="absolute top-10 flex flex-col items-center animate-pulse">
-                            <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg mb-1">
-                                Soft Launching
-                            </span>
-                            <span className="text-white/80 text-[10px] font-medium tracking-wider">
-                                심층 분석 리포트 무료 제공 중
-                            </span>
-                        </div>
+
 
                         <div className="relative w-full max-w-md aspect-square animate-in slide-in-from-bottom-10 fade-in duration-1000 flex flex-col items-center justify-center">
                             {/* Glow Effect behind logo */}

@@ -11,8 +11,8 @@ export default function TestGuide({ onStart }: TestGuideProps) {
             {/* Header: Credibility Badge */}
             <header className="pt-8 px-6 pb-4 flex justify-between items-center bg-white/50 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-gray-900 animate-pulse"></div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">PAIMA LAB</span>
+                    <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.5)]"></div>
+                    <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">PRISM LAB</span>
                 </div>
                 <div className="text-[10px] text-gray-400 font-medium">v2.4.0 verified</div>
             </header>
@@ -21,9 +21,9 @@ export default function TestGuide({ onStart }: TestGuideProps) {
 
                 {/* Headline Area */}
                 <div className="mb-10">
-                    <h1 className="text-3xl font-extrabold text-gray-900 leading-[1.25] tracking-tight mb-4">
-                        무의식은<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">거짓말을 하지 않습니다.</span>
+                    <h1 className="text-3xl font-extrabold text-gray-900 leading-[1.25] tracking-tight mb-4 font-serif-kr">
+                        당신의 무의식은<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">어떤 빛깔일까요?</span>
                     </h1>
                     <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
                         우리가 통제할 수 있는 의식은 빙산의 일각입니다.<br />
@@ -102,6 +102,25 @@ export default function TestGuide({ onStart }: TestGuideProps) {
                     <p className="text-[11px] text-gray-500 leading-relaxed">
                         정확한 분석을 위해 <strong>직관적으로 떠오르는 답</strong>을<br className="hidden md:block" />빠르게 선택해주세요. 오랫동안 고민하면 정확도가 떨어집니다.
                     </p>
+                </div>
+
+                {/* Soft Launch Event Card */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900 to-blue-900 p-6 text-white shadow-xl mb-8 animate-in zoom-in-95 duration-700 delay-300">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -ml-10 -mb-10 animate-pulse"></div>
+
+                    <div className="relative z-10 flex flex-col gap-2">
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/10 backdrop-blur-sm animate-pulse">
+                                Soft Launch Event
+                            </span>
+                        </div>
+                        <h3 className="text-lg font-bold">심층 분석 리포트 <span className="text-yellow-300">무료 제공</span></h3>
+                        <p className="text-xs text-blue-100/90 leading-relaxed">
+                            PRISM 런칭을 기념하여, 33,000원 상당의 Premium 심층 분석을<br />
+                            한시적으로 <strong>100% 무료</strong>로 제공해 드립니다.
+                        </p>
+                    </div>
                 </div>
 
             </main>
