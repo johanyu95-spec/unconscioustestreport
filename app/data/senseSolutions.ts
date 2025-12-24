@@ -474,7 +474,7 @@ export const SENSE_SOLUTIONS: SenseSolutionItem[] = [
 export const getRecommendedSolutions = (scores: any): SenseSolutionItem[] => {
     // Basic logic to determine tags from scores
     // This can be expanded significantly
-    const tags = [];
+    const tags: string[] = [];
     if (scores?.Z_iM_Pow > 0.5) tags.push("HIGH_POWER");
     if (scores?.Z_iM_Ach > 0.5) tags.push("HIGH_ACHIEVEMENT");
     if (scores?.Z_iM_Aff > 0.5) tags.push("HIGH_AFFILIATION");
