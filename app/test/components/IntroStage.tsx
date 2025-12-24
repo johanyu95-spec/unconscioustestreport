@@ -139,17 +139,20 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
                             {/* Logo Section on Black Background */}
                             <div className="mb-6 relative z-10">
                                 <div className="flex flex-col items-center gap-2">
-                                    {/* Logo Icon */}
-                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-900/50">
-                                        <Sparkles className="w-7 h-7 text-white" />
+                                    {/* Company Logo */}
+                                    <div className="w-24 h-24 flex items-center justify-center">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src="/images/logo_lm_pd.png"
+                                            alt="LM PD Logo"
+                                            className="w-full h-full object-contain"
+                                        />
                                     </div>
-                                    {/* Logo Text */}
-                                    <span className="text-white font-bold tracking-[0.3em] text-sm mt-2">PRISM</span>
                                 </div>
                             </div>
 
-                            {/* Content Section (White Background starts here technically, but we position content over the overlap) */}
-                            <div className="mt-2">
+                            {/* Content Section */}
+                            <div className="-mt-2">
                                 {/* Badge */}
                                 <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-wider uppercase mb-4 border border-blue-100">
                                     Soft Launching
