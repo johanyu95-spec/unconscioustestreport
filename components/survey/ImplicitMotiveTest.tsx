@@ -59,6 +59,8 @@ export default function ImplicitMotiveTest() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeLeft, setTimeLeft] = useState(30);
 
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
     // Safety check for undefined image
     const currentImage = IMAGES[currentImgIndex] || IMAGES[0];
     const currentQuestion = currentImage?.questions?.[currentQuestionIndex] || { id: "error", text: "Error" };
@@ -71,25 +73,33 @@ export default function ImplicitMotiveTest() {
     }, [currentImgIndex]);
 
     const handleAnswer = (val: number) => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+
         // Save Answer
         setImplicitAnswer(`${currentImage.id}_${currentQuestion.id}`, val);
 
-        // Advance Logic
-        if (currentQuestionIndex < currentImage.questions.length - 1) {
-            // Next Question in same image
-            setCurrentQuestionIndex((prev) => prev + 1);
-        } else {
-            // Image Done
-            if (currentImgIndex < IMAGES.length - 1) {
-                // Next Image
-                setCurrentImgIndex((prev) => prev + 1);
-                setCurrentQuestionIndex(0);
-                setTimeLeft(30);
+        // Transition Delay for visual feedback
+        setTimeout(() => {
+            if (currentQuestionIndex < currentImage.questions.length - 1) {
+                // Next Question in same image
+                setCurrentQuestionIndex((prev) => prev + 1);
+                setIsTransitioning(false);
             } else {
-                // All Images Done -> Next Section
-                setStep("EXPLICIT");
+                // Image Done
+                if (currentImgIndex < IMAGES.length - 1) {
+                    // Next Image
+                    setCurrentImgIndex((prev) => prev + 1);
+                    setCurrentQuestionIndex(0);
+                    setTimeLeft(30);
+                    setIsTransitioning(false);
+                } else {
+                    // All Images Done -> Next Section
+                    setStep("EXPLICIT");
+                    // No unlock needed as component unmounts
+                }
             }
-        }
+        }, 300); // 300ms delay for smooth transition
     };
 
     return (
@@ -105,19 +115,22 @@ export default function ImplicitMotiveTest() {
             </div>
 
             {/* Image Area */}
-            <div className="relative w-full overflow-hidden rounded-xl shadow-md bg-gray-100 aspect-video">
+            <div className="relative w-full overflow-hidden rounded-xl shadow-md bg-gray-100 aspect-video key={`img-${currentImgIndex}`}">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={currentImage.src}
                     alt="Test Image"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain animate-in fade-in duration-500"
                 />
             </div>
 
             <p className="text-gray-600 italic text-center text-sm">{currentImage.text}</p>
 
             {/* Single Question Area */}
-            <div className="flex-1 flex flex-col justify-center space-y-8 animate-in slide-in-from-right fade-in duration-300" key={currentQuestion.id}>
+            <div
+                className="flex-1 flex flex-col justify-center space-y-8 animate-in slide-in-from-right fade-in duration-300"
+                key={`${currentImgIndex}-${currentQuestionIndex}`}
+            >
                 <p className="text-xl font-bold text-center text-gray-900 leading-relaxed">
                     &quot;{currentQuestion.text}&quot;
                 </p>
@@ -133,7 +146,12 @@ export default function ImplicitMotiveTest() {
                             <button
                                 key={val}
                                 onClick={() => handleAnswer(val)}
-                                className="flex-1 aspect-square rounded-2xl bg-white border-2 border-gray-100 text-xl font-bold text-gray-600 shadow-sm hover:border-blue-500 hover:text-blue-600 hover:scale-110 transition-all active:scale-95 active:bg-blue-50"
+                                disabled={isTransitioning}
+                                className={`flex-1 aspect-square rounded-2xl border-2 text-xl font-bold shadow-sm transition-all
+                                    ${isTransitioning
+                                        ? 'bg-gray-100 text-gray-400 border-gray-100 cursor-not-allowed'
+                                        : 'bg-white border-gray-100 text-gray-600 hover:border-blue-500 hover:text-blue-600 hover:scale-110 active:scale-95 active:bg-blue-50'
+                                    }`}
                             >
                                 {val}
                             </button>

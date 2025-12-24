@@ -351,11 +351,11 @@ export default function ReportPage() {
                                         {isProcessing ? (
                                             <>
                                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                                결제 및 분석 중...
+                                                분석 생성 중...
                                             </>
                                         ) : (
                                             <>
-                                                <Sparkles className="w-4 h-4" /> 심층 분석 받아보기 (₩33,000)
+                                                <Sparkles className="w-4 h-4" /> 심층 분석 받아보기 (무료 - 소프트 런칭)
                                             </>
                                         )}
                                     </button>
@@ -644,7 +644,7 @@ export default function ReportPage() {
                             {isProcessing ? (
                                 '처리 중...'
                             ) : (
-                                <><Lock className="w-4 h-4" /> 심층 분석 받아보기 (₩33,000)</>
+                                <><Lock className="w-4 h-4" /> 심층 분석 받아보기 (무료 - 소프트 런칭 이벤트)</>
                             )}
                         </button>
                     ) : (
