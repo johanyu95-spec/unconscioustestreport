@@ -155,7 +155,8 @@ export default function WebReportView({
         risk_of_misalignment: ''
     };
 
-    const profile = geminiAnalysis || safeResultProfiles[profileKey] || fallbackProfile;
+    const mergedProfile = geminiAnalysis ? { ...safeResultProfiles[profileKey], ...geminiAnalysis } : (safeResultProfiles[profileKey] || fallbackProfile);
+    const profile = mergedProfile;
 
     // Helper for Z-score formatting
     const getLevel = (z: number) => {

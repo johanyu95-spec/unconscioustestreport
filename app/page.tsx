@@ -144,15 +144,24 @@ export default function HomePage() {
                             </span>
                         </div>
 
-                        <div className="relative w-full max-w-md aspect-square animate-in slide-in-from-bottom-10 fade-in duration-1000">
+                        <div className="relative w-full max-w-md aspect-square animate-in slide-in-from-bottom-10 fade-in duration-1000 flex flex-col items-center justify-center">
                             {/* Glow Effect behind logo */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/20 rounded-full blur-[100px] animate-pulse"></div>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-tr from-blue-500/30 to-purple-500/30 rounded-full blur-[80px] animate-pulse"></div>
 
                             <img
                                 src="/intro_splash.png"
-                                alt="Unconscious Test Intro"
-                                className={`w-full h-full object-contain drop-shadow-2xl relative z-10 transition-transform duration-[4000ms] ease-out ${isZooming ? 'scale-125' : 'scale-100'}`}
+                                alt="PRISM Intro"
+                                className={`w-3/4 h-3/4 object-contain drop-shadow-2xl relative z-10 transition-transform duration-[4000ms] ease-out ${isZooming ? 'scale-110' : 'scale-100'}`}
                             />
+
+                            <div className="mt-8 text-center space-y-2 z-20">
+                                <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-widest font-serif-kr drop-shadow-lg">
+                                    PRISM
+                                </h1>
+                                <p className="text-gray-400 text-xs font-light tracking-[0.2em] uppercase">
+                                    Unpack Your Inner Light
+                                </p>
+                            </div>
                         </div>
                     </div>
                 );

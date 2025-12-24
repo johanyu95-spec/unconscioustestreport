@@ -287,7 +287,7 @@ export default function ReportPage() {
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans-kr pb-32">
             {/* Header ... */}
             <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-                <h1 className="font-serif-kr text-xl font-bold text-gray-900">PAIMA <span className="text-blue-600 text-xs align-top">RESULT</span></h1>
+                <h1 className="font-serif-kr text-xl font-bold text-gray-900">PRISM <span className="text-blue-600 text-xs align-top">RESULT</span></h1>
                 <button onClick={() => router.push('/')} className="p-2 hover:bg-gray-100 rounded-full text-gray-600 transition-colors">
                     <Home className="w-5 h-5" />
                 </button>
