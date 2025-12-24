@@ -141,7 +141,7 @@ export default function HomePage() {
                             <img
                                 src="/intro_splash.png"
                                 alt="Unconscious Test Intro"
-                                className="w-full h-full object-contain drop-shadow-2xl relative z-10"
+                                className={`w-full h-full object-contain drop-shadow-2xl relative z-10 transition-transform duration-1000 ease-out ${isFadingOut ? 'scale-110' : 'scale-100'}`}
                             />
                         </div>
                     </div>
