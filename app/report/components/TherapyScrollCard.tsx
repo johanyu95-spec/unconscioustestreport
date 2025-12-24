@@ -18,11 +18,11 @@ interface TherapyCardProps {
 }
 
 const SenseIcons = {
-    visual: { icon: Eye, label: '시각', color: 'bg-blue-500/20 text-blue-300' },
-    auditory: { icon: Ear, label: '청각', color: 'bg-purple-500/20 text-purple-300' },
-    taste: { icon: Coffee, label: '미각', color: 'bg-orange-500/20 text-orange-300' },
-    smell: { icon: Wind, label: '후각', color: 'bg-green-500/20 text-green-300' },
-    touch: { icon: Hand, label: '촉각', color: 'bg-pink-500/20 text-pink-300' },
+    visual: { icon: Eye, label: '시각', color: 'bg-blue-500/20 text-blue-600', image: '/images/sense/sense_visual.webp' },
+    auditory: { icon: Ear, label: '청각', color: 'bg-purple-500/20 text-purple-600', image: '/images/sense/sense_auditory.webp' },
+    taste: { icon: Coffee, label: '미각', color: 'bg-orange-500/20 text-orange-600', image: '/images/sense/sense_taste.webp' },
+    smell: { icon: Wind, label: '후각', color: 'bg-green-500/20 text-green-600', image: '/images/sense/sense_smell.webp' },
+    touch: { icon: Hand, label: '촉각', color: 'bg-pink-500/20 text-pink-600', image: '/images/sense/sense_touch.webp' },
 };
 
 export default function TherapyScrollCard({ items }: TherapyCardProps) {
@@ -30,7 +30,7 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
 
     return (
         <div className="w-full space-y-4">
-            <h3 className="text-lg font-bold text-[--text-primary] px-1 flex items-center gap-2">
+            <h3 className="text-lg font-bold text-gray-900 px-1 flex items-center gap-2">
                 <span className="text-xl">🌿</span> 오감 테라피
             </h3>
 
@@ -38,6 +38,8 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                 {items.map((item, index) => {
                     const Sense = SenseIcons[item.type] || SenseIcons.visual;
                     const Icon = Sense.icon;
+                    // Force replace image with the Representative Sense Image
+                    const displayImage = Sense.image;
 
                     return (
                         <motion.div
@@ -47,26 +49,26 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
                             onClick={() => setSelectedItem(item)}
-                            className="flex-none w-[160px] h-[200px] rounded-[var(--border-radius-card)] relative overflow-hidden snap-start shadow-lg cursor-pointer group bg-black"
+                            className="flex-none w-[160px] h-[200px] rounded-[var(--border-radius-card)] relative overflow-hidden snap-start shadow-lg cursor-pointer group bg-gray-900"
                         >
                             {/* Background Image */}
                             <motion.div
                                 layoutId={`image-${item.id}`}
                                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80"
-                                style={{ backgroundImage: `url(${item.image})` }}
+                                style={{ backgroundImage: `url(${displayImage})` }}
                             />
 
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
 
                             {/* Sense Badge */}
-                            <div className={`absolute top-3 left-3 p-1.5 rounded-full backdrop-blur-md border border-white/10 ${Sense.color}`}>
+                            <div className={`absolute top-3 left-3 p-1.5 rounded-full backdrop-blur-md border border-white/20 bg-white/10 ${Sense.color.replace('text-', 'text-white ')}`}>
                                 <Icon className="w-3.5 h-3.5" />
                             </div>
 
                             {/* Content */}
                             <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                                <motion.h4 layoutId={`title-${item.id}`} className="text-white font-bold text-sm leading-tight group-hover:text-[--text-highlight] transition-colors">
+                                <motion.h4 layoutId={`title-${item.id}`} className="text-white font-bold text-sm leading-tight group-hover:text-blue-300 transition-colors">
                                     {item.title}
                                 </motion.h4>
                                 <div className="h-0.5 w-8 bg-white/30 mt-2 group-hover:w-full transition-all duration-300"></div>
@@ -86,13 +88,13 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedItem(null)}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                         />
 
                         {/* Card Content */}
                         <motion.div
                             layoutId={`card-${selectedItem.id}`}
-                            className="w-full max-w-sm bg-[--bg-card] rounded-3xl overflow-hidden relative z-10 shadow-2xl border border-white/10"
+                            className="w-full max-w-sm bg-white rounded-3xl overflow-hidden relative z-10 shadow-2xl"
                         >
                             <button
                                 onClick={() => setSelectedItem(null)}
@@ -106,22 +108,22 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                                 <motion.div
                                     layoutId={`image-${selectedItem.id}`}
                                     className="absolute inset-0 bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${selectedItem.image})` }}
+                                    style={{ backgroundImage: `url(${SenseIcons[selectedItem.type].image})` }}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[--bg-card]" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
                                 <div className="absolute bottom-6 left-6 right-6">
                                     <div className="flex items-center gap-2 mb-2">
-                                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border border-white/10 backdrop-blur-md ${SenseIcons[selectedItem.type].color}`}>
+                                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/20`}>
                                             {SenseIcons[selectedItem.type].label} Therapy
                                         </span>
                                     </div>
-                                    <motion.h2 layoutId={`title-${selectedItem.id}`} className="text-2xl font-black text-white mb-2">
+                                    <motion.h2 layoutId={`title-${selectedItem.id}`} className="text-2xl font-black text-white mb-2 shadow-black drop-shadow-md">
                                         {selectedItem.title}
                                     </motion.h2>
                                     <div className="flex flex-wrap gap-2">
                                         {selectedItem.keywords.map((keyword) => (
-                                            <span key={keyword} className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] text-[--text-highlight] font-bold border border-white/5">
+                                            <span key={keyword} className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] text-white font-bold border border-white/10">
                                                 #{keyword}
                                             </span>
                                         ))}
@@ -130,21 +132,21 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                             </div>
 
 
-                            {/* Text Body */}
-                            <div className="p-6 pt-0 space-y-6">
+                            {/* Text Body - Fixed Readability */}
+                            <div className="p-6 pt-6 space-y-6">
                                 <div className="space-y-3">
-                                    <div className="flex items-center gap-2 text-[--text-secondary] text-xs font-bold uppercase tracking-wider">
-                                        <Sparkles className="w-4 h-4 text-[--text-highlight]" />
+                                    <div className="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-wider">
+                                        <Sparkles className="w-4 h-4" />
                                         Why it helps
                                     </div>
-                                    <p className="text-sm text-gray-300 leading-relaxed font-light">
+                                    <p className="text-sm text-gray-700 leading-relaxed font-medium">
                                         {selectedItem.description}
                                     </p>
                                 </div>
 
                                 <button
                                     onClick={() => setSelectedItem(null)}
-                                    className="w-full py-4 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-bold text-sm transition-colors"
+                                    className="w-full py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold text-sm transition-colors shadow-lg"
                                 >
                                     확인했어요
                                 </button>
@@ -162,7 +164,7 @@ export default function TherapyScrollCard({ items }: TherapyCardProps) {
                     background: transparent;
                 }
                 .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: rgba(255,255,255,0.1);
+                    background: rgba(0,0,0,0.1); /* Darker thumb for light bg */
                     border-radius: 10px;
                 }
             `}</style>
