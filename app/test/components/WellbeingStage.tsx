@@ -12,9 +12,14 @@ export default function WellbeingStage({ onComplete }: WellbeingStageProps) {
     const [answers, setAnswers] = useState<Record<number, number>>({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
     const questions = TestData.wellbeingQuestions;
 
     const handleAnswer = (val: number) => {
+        if (isTransitioning) return; // Prevent double clicks
+        setIsTransitioning(true);
+
         const newAnswers = { ...answers, [currentQuestionIndex]: val };
         setAnswers(newAnswers);
 
@@ -22,8 +27,10 @@ export default function WellbeingStage({ onComplete }: WellbeingStageProps) {
         setTimeout(() => {
             if (currentQuestionIndex < questions.length - 1) {
                 setCurrentQuestionIndex(prev => prev + 1);
+                setIsTransitioning(false); // Unlock for next question
             } else {
                 onComplete({ wellbeingAnswers: newAnswers });
+                // Do not unlock here to prevent further interactions
             }
         }, 400);
     };
