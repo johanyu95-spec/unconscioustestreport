@@ -323,6 +323,7 @@ export default function ReportPage() {
                                 geminiAnalysis={geminiAnalysis}
                                 radarData={radarData}
                                 barData={barData}
+                                onStartDeepAnalysis={() => setCurrentPage(1)}
                             />
                         </div>
                     )}

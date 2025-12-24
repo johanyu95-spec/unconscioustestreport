@@ -124,7 +124,9 @@ interface WebReportViewProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     radarData?: any[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     barData?: any[];
+    onStartDeepAnalysis?: () => void;
 }
 
 export default function WebReportView({
@@ -135,7 +137,8 @@ export default function WebReportView({
     onAnalyze,
     geminiAnalysis,
     radarData,
-    barData
+    barData,
+    onStartDeepAnalysis
 }: WebReportViewProps) {
     const paima = results.paima || {};
     const profileKey = paima.profileKey || 'WANDERING_EXPLORER';
@@ -264,6 +267,20 @@ export default function WebReportView({
             </div>
 
 
+
+            {/* 3. Deep Analysis Call to Action */}
+            <div className="mt-8">
+                <button
+                    onClick={onStartDeepAnalysis}
+                    className="w-full py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 group"
+                >
+                    <span className="group-hover:animate-pulse">✨</span>
+                    <span>심층 분석 시작하기</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </button>
+            </div>
 
         </div>
     );
