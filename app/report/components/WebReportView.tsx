@@ -34,7 +34,21 @@ export default function WebReportView({
     const profileKey = paima.profileKey || 'WANDERING_EXPLORER';
 
     // Use Gemini Generated Profile if available, otherwise static
-    const profile = geminiAnalysis || RESULT_PROFILES[profileKey] || RESULT_PROFILES['WANDERING_EXPLORER'];
+    // Use Gemini Generated Profile if available, otherwise static
+    const safeResultProfiles = RESULT_PROFILES || {};
+    const fallbackProfile = safeResultProfiles['WANDERING_EXPLORER'] || {
+        profile_name: '분석 중...',
+        profile_summary: '데이터를 불러오는 중입니다.',
+        core_theme: '',
+        persona: '',
+        shadow: '',
+        internal_conflict: '',
+        latent_potential: { reframed_shadow: '', positive_interpretation: '', development_direction: '' },
+        behavioral_tendencies: '',
+        risk_of_misalignment: ''
+    };
+
+    const profile = geminiAnalysis || safeResultProfiles[profileKey] || fallbackProfile;
 
     // Helper for Z-score formatting
     const getLevel = (z: number) => {

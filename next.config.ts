@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  turbopack: {}, // Silence Turbopack/Webpack conflict error by acknowledging it
+  /* config options here */
+  // turbopack: {}, // Removed to fix local build crash with Korean paths
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
