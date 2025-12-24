@@ -1,0 +1,58 @@
+Start seeding ResultContent...
+Prisma keys: [
+  '_originalClient',
+  '_runtimeDataModel',
+  '_requestHandler',
+  '_connectionPromise',
+  '_disconnectionPromise',
+  '_engineConfig',
+  '_accelerateEngineConfig',
+  '_clientVersion',
+  '_errorFormat',
+  '_tracingHelper',
+  '_previewFeatures',
+  '_activeProvider',
+  '_globalOmit',
+  '_extensions',
+  '_engine',
+  '_appliedParent',
+  '_createPrismaPromise',
+  '$metrics',
+  '$extends',
+  'constructor',
+  '$on',
+  '$connect',
+  '$disconnect',
+  '$executeRawInternal',
+  '$executeRaw',
+  '$executeRawUnsafe',
+  '$runCommandRaw',
+  '$queryRawInternal',
+  '$queryRaw',
+  '$queryRawTyped',
+  '$queryRawUnsafe',
+  '_transactionWithArray',
+  '_transactionWithCallback',
+  '_createItxClient',
+  '$transaction',
+  '_request',
+  '_executeRequest',
+  '_hasPreviewFlag',
+  '$applyPendingMigrations',
+  'question',
+  'choiceScore',
+  'resultMapping',
+  'userResponse',
+  '$parent'
+]
+TypeError: Cannot read properties of undefined (reading 'upsert')
+    at main (/Users/hyeonwuckyou/무의식 웹앱 디자인/prisma/seed.ts:63:36)
+    at <anonymous> (/Users/hyeonwuckyou/무의식 웹앱 디자인/prisma/seed.ts:73:1)
+    at Object.<anonymous> (/Users/hyeonwuckyou/무의식 웹앱 디자인/prisma/seed.ts:80:6)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object.transformer (/Users/hyeonwuckyou/.npm/_npx/fd45a72a545557e9/node_modules/tsx/dist/register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at cjsLoader (node:internal/modules/esm/translators:268:5)

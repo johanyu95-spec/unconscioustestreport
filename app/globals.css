@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  /* Apple-style Palette (Light Mode Default) */
+  --background: #F5F5F7;
+  /* Apple System Gray 6 / Off White */
+  --foreground: #1D1D1F;
+  /* Apple Text Black */
+
+  --primary: #007AFF;
+  /* Apple Blue (Default Action) - OR keep Deep Navy if brand requires */
+  /* Keeping Brand Colors but refining tones */
+  --brand-primary: #1A237E;
+  --brand-accent: #FF3B30;
+
+  --grey: #86868B;
+  /* Apple Gray */
+  --surface: #FFFFFF;
+  /* Pure White Cards */
+  --surface-glass: rgba(255, 255, 255, 0.7);
+
+  /* Apple Shadow System */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* Premium Dark Mode Tokens (User Request) */
+  --bg-main: #121212;
+  --bg-card: #1E1E2E;
+  --bg-accent-gradient: linear-gradient(135deg, #4A00E0, #8E2DE2);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0B0;
+  --text-highlight: #FFD700;
+  --text-danger: #FF4D4D;
+
+  --graph-im-purple: rgba(138, 43, 226, 0.6);
+  --graph-im-border: #8A2BE2;
+  --graph-em-red: rgba(255, 99, 71, 0.1);
+  --graph-em-border: #FF6347;
+
+  --status-positive-blue: #3498db;
+  --status-negative-red: #e74c3c;
+  --status-warning-orange: #FF8C00;
+
+  --border-radius-card: 16px;
+  --padding-card: 20px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-accent: var(--brand-accent);
+  --color-grey: var(--grey);
+  --color-surface: var(--surface);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-noto-serif);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(circle at 50% 0%, #E3E3E8 0%, #F5F5F7 100%);
+  min-height: 100vh;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

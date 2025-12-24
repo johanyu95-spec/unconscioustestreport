@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider   = "prisma-client-js"
+  output     = "../node_modules/.prisma/client"
+  engineType = "library"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+
+
+model User {
+  id        String       @id @default(uuid())
+  email     String       @unique
+  name      String?
+  tests     TestResult[]
+  createdAt DateTime     @default(now())
+}
+
+model TestResult {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  
+  // User Info
+  email       String?     // Sent via email form or auth
+  isPaid      Boolean     @default(false)
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+
+  // Raw Data (Questions Answers)
+  answers     Json        // { implicit:..., explicit:..., wellbeing:... }
+
+  // Relations
+  metric      TestMetric?
+  analysis    TestAnalysis?
+}
+
+model TestMetric {
+  id           String     @id @default(uuid())
+  testResultId String     @unique
+  testResult   TestResult @relation(fields: [testResultId], references: [id])
+
+  // 16 Z-Scores (Psychological Indicators)
+  z_iM_Ach      Float
+  z_iM_Pow      Float
+  z_iM_Aff      Float
+  z_eM_Ach      Float
+  z_eM_Pow      Float
+  z_eM_Aff      Float
+  
+  z_MDI_Ach     Float
+  z_MDI_Pow     Float
+  z_MDI_Aff     Float
+  z_PSCI        Float
+  
+  z_N_Auto      Float
+  z_N_Comp      Float
+  z_N_Rela      Float
+  
+  z_W_Wellbeing Float
+  z_C_Depletion Float
+  z_C_External  Float
+
+  // Derived Profile Key (Maps to ResultContent)
+  profileKey    String
+}
+
+model TestAnalysis {
+  id           String     @id @default(uuid())
+  testResultId String     @unique
+  testResult   TestResult @relation(fields: [testResultId], references: [id])
+  
+  // AI Generated Personal Analysis
+  content      Json       
+  createdAt    DateTime   @default(now())
+}
+
+model ResultContent {
+  key         String     @id // e.g., "DORMANT_RULER"
+  name        String     // e.g., "야망을 숨긴 통치자"
+  summary     String
+  description String     @db.Text
+  features    Json       // Array of strings (Traits)
+  
+  // Optional media
+  imageUrl    String?
+}
