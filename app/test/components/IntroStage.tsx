@@ -116,56 +116,75 @@ export default function IntroStage({ onComplete }: IntroStageProps) {
 
             {/* PROMO POPUP MODAL */}
             {showPromo && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl relative animate-in zoom-in-95 slide-in-from-bottom-5 duration-500">
-                        {/* Decorative Background */}
-                        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-br from-indigo-900 to-blue-900">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10 animate-pulse"></div>
-                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -ml-10 -mb-10 animate-pulse"></div>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
+                    <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.4)] border border-blue-500/30 relative animate-in zoom-in-95 slide-in-from-bottom-5 duration-500">
+
+                        {/* Decorative Background (Top) */}
+                        <div className="absolute top-0 inset-x-0 h-40 bg-black">
+                            {/* Blue Glow Effects inside black bg */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-600/20 rounded-full blur-[40px] animate-pulse"></div>
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/20 rounded-full blur-3xl"></div>
                         </div>
 
                         {/* Close Button (Top Right) */}
                         <button
                             onClick={() => setShowPromo(false)}
-                            className="absolute top-4 right-4 z-20 p-2 bg-black/20 backdrop-blur-md rounded-full text-white/90 hover:bg-black/40 transition-colors"
+                            className="absolute top-4 right-4 z-20 p-2 bg-white/10 backdrop-blur-md rounded-full text-white/70 hover:bg-white/20 transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
-                        <div className="relative pt-8 px-6 pb-6 text-center flex flex-col items-center">
-                            {/* Icon/Badge */}
-                            <div className="mb-4 relative">
-                                <div className="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center relative z-10 rotate-3">
-                                    <Sparkles className="w-8 h-8 text-blue-600 fill-blue-100" />
+                        <div className="relative pt-10 px-6 pb-8 text-center flex flex-col items-center">
+
+                            {/* Logo Section on Black Background */}
+                            <div className="mb-6 relative z-10">
+                                <div className="flex flex-col items-center gap-2">
+                                    {/* Logo Icon */}
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-900/50">
+                                        <Sparkles className="w-7 h-7 text-white" />
+                                    </div>
+                                    {/* Logo Text */}
+                                    <span className="text-white font-bold tracking-[0.3em] text-sm mt-2">PRISM</span>
                                 </div>
-                                <div className="absolute inset-0 bg-blue-500/30 blur-xl transform translate-y-2"></div>
                             </div>
 
-                            {/* Badge Text */}
-                            <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-wider uppercase mb-3 border border-blue-100">
-                                Soft Launch Event
-                            </span>
+                            {/* Content Section (White Background starts here technically, but we position content over the overlap) */}
+                            <div className="mt-2">
+                                {/* Badge */}
+                                <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-wider uppercase mb-4 border border-blue-100">
+                                    Soft Launching
+                                </span>
 
-                            {/* Headline */}
-                            <h3 className="text-xl font-extrabold text-gray-900 mb-2 leading-snug">
-                                심층 분석 리포트<br />
-                                <span className="text-blue-600">무료 제공 프로모션</span>
-                            </h3>
+                                {/* Headline */}
+                                <h3 className="text-xl font-extrabold text-gray-900 mb-3 leading-snug">
+                                    심층 분석 리포트<br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">무료 제공 이벤트</span>
+                                </h3>
 
-                            {/* Description */}
-                            <p className="text-gray-500 text-sm leading-relaxed mb-6 break-keep">
-                                PRISM 런칭을 기념하여<br />
-                                유료 Premium 심층 분석을 한시적으로<br />
-                                <strong>100% 무료</strong>로 제공해 드립니다.
-                            </p>
+                                {/* Description */}
+                                <div className="space-y-4 mb-8">
+                                    <p className="text-gray-600 text-sm leading-relaxed break-keep">
+                                        <strong>PRISM 소프트 런칭</strong>을 기념하여<br />
+                                        지금 검사를 진행하시는 모든 분들께<br />
+                                        심층 분석 리포트를 <strong>무료</strong>로 제공합니다.
+                                    </p>
 
-                            {/* CTA Button is closing the modal as per request to 'enter' */}
-                            <button
-                                onClick={() => setShowPromo(false)}
-                                className="w-full py-4 bg-gray-900 hover:bg-black text-white rounded-2xl font-bold text-sm shadow-xl shadow-gray-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
-                            >
-                                혜택 받고 시작하기
-                            </button>
+                                    {/* Paid Notice */}
+                                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                                        <p className="text-[11px] text-gray-400 break-keep leading-relaxed">
+                                            ※ 정식 오픈 시에는 정밀 리포트가 유료(Premium) 컨텐츠로 전환되어 만나보실 수 있습니다.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* CTA Button */}
+                                <button
+                                    onClick={() => setShowPromo(false)}
+                                    className="w-full py-4 bg-gray-900 hover:bg-black text-white rounded-2xl font-bold text-sm shadow-xl shadow-gray-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 ring-1 ring-white/20"
+                                >
+                                    무료로 분석 받기
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
