@@ -84,8 +84,8 @@ export const determineProfile = (scores: PaimaScores): ProfileKey => {
 
 export const determineDetailedProfile = (scores: PaimaScores): string => {
     const baseProfile = determineProfile(scores);
-    const subtype = determineSubtype(scores);
-    return `${baseProfile}_${subtype}`;
+    // const subtype = determineSubtype(scores); // Disable subtype appending
+    return baseProfile; // Return valid key only
 };
 
 const determineSubtype = (scores: PaimaScores): string => {
