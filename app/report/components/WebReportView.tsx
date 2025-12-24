@@ -1,24 +1,30 @@
 'use client';
 
 import { RESULT_PROFILES } from '../../../data/resultProfiles';
-import { Share2, Download, ChevronRight, BarChart3, AlertCircle, Sparkles, BrainCircuit } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
+import { BarChart3, AlertCircle, Sparkles, BrainCircuit } from 'lucide-react';
+// import ReactMarkdown from 'react-markdown';
 
 import OverlapCircleComponent from './OverlapCircleComponent';
 import HorizontalBarChartComponent from './HorizontalBarChartComponent';
 
 interface WebReportViewProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     results: any;
     isAnalyzing?: boolean;
     onAnalyze?: () => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     geminiAnalysis?: any; // Now expects the full profile object if available
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     radarData?: any[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     barData?: any[];
 }
 
 export default function WebReportView({
     results,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     isAnalyzing = false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onAnalyze,
     geminiAnalysis,
     radarData,

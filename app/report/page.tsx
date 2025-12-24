@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Home, Lock, Sparkles } from 'lucide-react';
 import WebReportView from './components/WebReportView';
@@ -9,7 +9,7 @@ import { useTestStore } from '@/store/testStore';
 
 import MindBatteryComponent from './components/MindBatteryComponent';
 import TherapyScrollCard from './components/TherapyScrollCard';
-import { RESULT_PROFILES } from '../../data/resultProfiles';
+// import { RESULT_PROFILES } from '../../data/resultProfiles';
 
 // Dynamic import for PDF components to disable SSR
 

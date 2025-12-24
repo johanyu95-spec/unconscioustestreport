@@ -38,10 +38,12 @@ export default function RadarChartComponent({ data }: RadarChartProps) {
         // SVG d: M p0 ... C cp1 cp2 p1 ...
         // For 3 points, we can just curve between them.
 
-        let d = `M ${points[0].x} ${points[0].y}`;
+        const d = `M ${points[0].x} ${points[0].y}`;
 
         for (let i = 0; i < points.length; i++) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const p0 = points[i];
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const p1 = points[(i + 1) % points.length];
 
             // Calculate Control Points (Simple curvature)
