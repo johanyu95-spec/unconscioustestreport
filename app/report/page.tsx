@@ -264,6 +264,8 @@ export default function ReportPage() {
 
     if (!isClient) return null;
 
+    const paima = activeResults?.paima;
+
     // Dynamic Data Calculation
     const radarData = [
         { subject: '성취', A: mapZ(paima?.Z_iM_Ach), B: mapZ(paima?.Z_eM_Ach), fullMark: 100 },
@@ -279,7 +281,6 @@ export default function ReportPage() {
 
     const positiveEnergy = mapZ(paima?.Z_W_Wellbeing);
 
-    const paima = activeResults?.paima;
     // const profile = paima?.profileKey ? RESULT_PROFILES[paima.profileKey] : RESULT_PROFILES['DORMANT_RULER'];
 
     return (
