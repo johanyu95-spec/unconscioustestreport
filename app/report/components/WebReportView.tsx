@@ -1,6 +1,6 @@
 'use client';
 
-import { RESULT_PROFILES } from '../../../data/resultProfiles';
+import { RESULT_PROFILES } from '@/lib/resultProfiles';
 import { BarChart3, AlertCircle, Sparkles, BrainCircuit } from 'lucide-react';
 // import ReactMarkdown from 'react-markdown';
 

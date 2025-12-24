@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Font, Svg, Line, Rect, Circle, Polyline, Image } from '@react-pdf/renderer';
-import { RESULT_PROFILES } from '../../../data/resultProfiles';
-import { getInterpretation } from '../../../lib/resultCalculator';
+import { RESULT_PROFILES } from '@/lib/resultProfiles';
+import { getInterpretation } from '@/lib/resultCalculator';
 
 // Korean Font Support - Using Google Fonts API
 Font.register({
